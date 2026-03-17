@@ -244,7 +244,7 @@ export function Training() {
                                     <Button
                                         size="lg"
                                         className="w-full bg-purple-600 hover:bg-purple-700 text-white"
-                                        onClick={() => window.open('https://example.com/vr-training', '_blank')}
+                                        onClick={() => window.open('http://inhalo-360.vercel.app/', '_blank')}
                                     >
                                         {t('training.vr.button')}
                                     </Button>
