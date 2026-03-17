@@ -47,8 +47,18 @@ function readEnvLocalValue(key: string): string {
   return ''
 }
 
-const convaiApiKeyFromLocal = readEnvLocalValue('VITE_CONVAI_API_KEY')
-const convaiCharacterIdFromLocal = readEnvLocalValue('VITE_CONVAI_CHARACTER_ID')
+function readConfigValue(key: string): string {
+  const fromProcessEnv = process.env[key]?.trim()
+
+  if (fromProcessEnv) {
+    return fromProcessEnv
+  }
+
+  return readEnvLocalValue(key)
+}
+
+const convaiApiKey = readConfigValue('VITE_CONVAI_API_KEY')
+const convaiCharacterId = readConfigValue('VITE_CONVAI_CHARACTER_ID')
 
 export default defineConfig({
   plugins: [
@@ -64,8 +74,8 @@ export default defineConfig({
     },
   },
   define: {
-    __CONVAI_API_KEY__: JSON.stringify(convaiApiKeyFromLocal),
-    __CONVAI_CHARACTER_ID__: JSON.stringify(convaiCharacterIdFromLocal),
+    __CONVAI_API_KEY__: JSON.stringify(convaiApiKey),
+    __CONVAI_CHARACTER_ID__: JSON.stringify(convaiCharacterId),
   },
 
   // File types to support raw imports. Never add .css, .tsx, or .ts files to this.
